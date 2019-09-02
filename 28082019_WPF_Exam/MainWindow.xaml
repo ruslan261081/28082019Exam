@@ -1,0 +1,33 @@
+﻿<Window x:Class="_28082019_WPF_Exam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_28082019_WPF_Exam"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:SizeConverterHeight x:Key="SizeConverterHeight"></local:SizeConverterHeight>
+        <local:SizeConverterWidth x:Key="SizeConverterWidth"></local:SizeConverterWidth>
+    </Window.Resources>
+    <Grid>
+        <Label Content="Text:" HorizontalAlignment="Left" Margin="270,59,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MyBtn" HorizontalAlignment="Left" Height="23" Margin="240,65,0,0" TextWrapping="Wrap" Text="I LOVE WPF" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="112,131,0,0" TextWrapping="Wrap" Text="Width" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="112,206,0,0" TextWrapping="Wrap" Text="Height" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Right" Margin="720,140,0,0" TextWrapping="Wrap" Text="{Binding ElementName=HeightSlider,Path=Value}" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Right" Margin="720,200,0,0" TextWrapping="Wrap" Text="{Binding ElementName=WidthSlider,Path=Value}" VerticalAlignment="Top" />
+        <Slider x:Name="HeightSlider" Value="{Binding Width}" IsSnapToTickEnabled="True" Minimum="30" Maximum="110" HorizontalAlignment="Left" Margin="241,134,0,0" VerticalAlignment="Top" Width="400"  />
+
+        <Slider x:Name="WidthSlider" Value="{Binding Height}" IsSnapToTickEnabled="True" Minimum="30" Maximum="110" HorizontalAlignment="Left" Margin="239,206,0,0" VerticalAlignment="Top" Width="400" />
+        <TextBlock HorizontalAlignment="Left" Margin="700,140,0,0" TextWrapping="Wrap" Text="{Binding Path=Value,ElementName=HeightSlider,Converter={StaticResource SizeConverterHeight}}" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="700,200,0,0" TextWrapping="Wrap" Text="{Binding Path=Value,ElementName=WidthSlider,Converter={StaticResource SizeConverterWidth}}" VerticalAlignment="Top" />
+        <Button x:Name="MyButton" Content="{Binding ElementName=MyBtn,Path=Text}" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Center" 
+
+                Width="{Binding Width}" Height="{Binding Height}"/>
+
+        
+
+
+    </Grid>
+</Window>
