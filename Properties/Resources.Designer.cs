@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _28082019_WPF_ExamQ2.Properties
+namespace _28082019_WPF_ExamQ3.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace _28082019_WPF_ExamQ2.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_28082019_WPF_ExamQ2.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_28082019_WPF_ExamQ3.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

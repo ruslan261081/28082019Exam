@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _28082019_WPF_ExamQ2.Properties
+namespace _28082019_WPF_ExamQ3.Properties
 {
 
 

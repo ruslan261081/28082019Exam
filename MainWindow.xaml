@@ -1,21 +1,29 @@
-﻿<Window x:Class="_28082019_WPF_ExamQ2.MainWindow"
+﻿<Window x:Class="_28082019_WPF_ExamQ3.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:_28082019_WPF_ExamQ2"
+        xmlns:local="clr-namespace:_28082019_WPF_ExamQ3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Command="{Binding YourAnswerWrong}" Name="version1" Content="360" HorizontalAlignment="Left" Height="67" Margin="100,138,0,0" VerticalAlignment="Top" Width="154"/>
-        <Button Command="{Binding WrightAnswer}" Name="version2" Content="360" HorizontalAlignment="Left" Height="67" Margin="487,310,0,0" VerticalAlignment="Top" Width="154"/>
-        <Button Command="{Binding YourAnswerWrong}" Name="version3" Content="360" HorizontalAlignment="Left" Height="67" Margin="482,132,0,0" VerticalAlignment="Top" Width="154" />
-        <Button Command="{Binding YourAnswerWrong}" Name="version4" Content="360" HorizontalAlignment="Left" Height="67" Margin="97,303,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="1.983,0.468"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="50*"/>
 
-        <TextBlock Name="Example" FontSize="30" HorizontalAlignment="Left" Height="56" Margin="270,38,0,0" TextWrapping="Wrap" Text="18 * 12 = ?" VerticalAlignment="Top" Width="260"/>
-        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="39" Margin="302,262,0,0" TextWrapping="Wrap" Text="Time Left" VerticalAlignment="Top" Width="156"/>
-        <TextBlock x:Name="TimeLeft"   FontSize="30" HorizontalAlignment="Left" Height="50" Margin="621,354,0,0" TextWrapping="Wrap" Foreground="{Binding TextColor}" Text="{Binding TimeValue}" VerticalAlignment="Top" Width="60" RenderTransformOrigin="-0.444,1.271"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="UrlTxtBx" HorizontalAlignment="Left" Height="30" Margin="325,53,0,0" TextWrapping="Wrap" Text="{Binding MyUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="244"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="214,60,0,0" TextWrapping="Wrap" Text="URL : " VerticalAlignment="Top" Width="53"/>
+
+        <Button x:Name="StartBtn" Content="Start" FontSize="12" Command="{Binding StartCommand}" HorizontalAlignment="Left" Margin="227,305,0,0" VerticalAlignment="Top" Width="135" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="216,173,0,0" TextWrapping="Wrap" Text="Size:" VerticalAlignment="Top" RenderTransformOrigin="2.094,1.055"/>
+        <TextBlock x:Name="SizeTxtBlck" HorizontalAlignment="Left" Margin="10,127,0,0" Width="149" TextWrapping="Wrap" Text="{Binding UrlSize, Mode=TwoWay}" VerticalAlignment="Top" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="368,167,0,0" TextWrapping="Wrap" Text="Time:" VerticalAlignment="Top" RenderTransformOrigin="0.894,0.571" Height="22" Width="44"/>
+        <TextBlock x:Name="TimeTxtBlck" HorizontalAlignment="Left" Margin="180,128,0,0" TextWrapping="Wrap" Text="{Binding ValueOfStopWatch}" Width="147" VerticalAlignment="Top" TextAlignment="Center"/>
 
     </Grid>
 </Window>
+
+
+

@@ -2,108 +2,102 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
-namespace _28082019_WPF_ExamQ2
+namespace _28082019_WPF_ExamQ3
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        public DelegateCommand YourAnswerWrong { get; set; }
-        public DelegateCommand WrightAnswer { get; set; }
+        public string urlStart;
+        private string myUrl;
+        public string MyUrl { get { return this.myUrl; } set { this.myUrl = value; OnPropertyChanged("MyUrl"); } }
 
-        public TimerCount TimerCount { get; set; }
-        public Brush _timerTextColor;
+        private string urlSize;
+        public string UrlSize { get { return urlSize; } set { urlSize = value; OnPropertyChanged("UrlSize"); } }
 
-        public Brush TimerTextColor
+        public string StopWatchValue
         {
             get
             {
-                return _timerTextColor;
+                if (myStopwatch.ElapsedMilliseconds == 0) return "0";
+                if (MyStopwatch.IsRunning == false && myStopwatch.ElapsedMilliseconds != 0) return $"You received The Respone At: {MyStopwatch.ElapsedMilliseconds.ToString()} MilliSeconds";
+                return MyStopwatch.ElapsedMilliseconds.ToString();
+
+
             }
             set
             {
-                this._timerTextColor = value;
-                OnPropertyChanged("TimerTextColor");
+                OnPropertyChanged("StopWatchValue");
             }
         }
 
-        public bool IsEnable = false;
-        private Brush _gridBackground;
+        private Stopwatch myStopwatch;
+        public Stopwatch MyStopwatch { get { return this.myStopwatch; } set { this.myStopwatch = value; } }
 
-        public Brush GridBackground
-        {
-            get
-            {
-                return _gridBackground;
-            }
-            set
-            {
-                this._gridBackground = value;
-                OnPropertyChanged("GridBackground");
-            }
-        }
+        public DelegateCommand StartCommand { get; set; }
+        public bool ProccessIsStart { get; set; } = true;
+        public object Thrad { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ViewModel()
         {
-            TimerTextColor = Brushes.Black;
-            GridBackground = Brushes.White;
-            TimerCount = new TimerCount();
-            TimerCount.TimerValue = 30;
-          
-            YourAnswerWrong = new DelegateCommand(ExecuteCommand, CanExecuteCommand);
-            WrightAnswer = new DelegateCommand(ExecuteCommandWrightAnswer, CanExecuteMethodWrightAnswer);
+            urlStart = "http";
+            myUrl = "";
+            urlSize = "Please Wait";
+            myStopwatch = new Stopwatch();
+
+            StartCommand = new DelegateCommand(() =>
+            {
+                CheckUrl(MyUrl);
+            },
+            () =>
+            {
+                return MyUrl.StartsWith(urlStart);
+
+            });
 
             Task.Run(() =>
             {
-                while (TimerCount.TimerValue != 15)
+                while(true)
                 {
-                    CanExecuteCommand();
+                    StartCommand.RaiseCanExecuteChanged();
                     Thread.Sleep(500);
                 }
-                while(TimerCount.TimerValue != 0)
-                {
-                    CanExecuteCommand();
-                    Thread.Sleep(500);
-                    TimerTextColor = Brushes.Red;
-                }
-                TimerTextColor = Brushes.Black;
-                GridBackground = Brushes.Red;
+
             });
-        }
-      
 
-        private bool CanExecuteMethodWrightAnswer()
-        {
-            return !IsEnable;
-        }
-
-        private void ExecuteCommandWrightAnswer()
-        {
-            
-            IsEnable = true;
-            GridBackground = Brushes.Green;
-        }
-
-        private bool CanExecuteCommand()
-        {
-            if(TimerCount.TimerValue == 0 || IsEnable)
+            Task.Run(() =>
             {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+                while (true)
+                {
+                    StopWatchValue = MyStopwatch.ElapsedMilliseconds.ToString();
+                }
+            });
+
         }
 
-        private void ExecuteCommand()
+        public async void CheckUrl(string url)
         {
-            
-            IsEnable = true;
-            GridBackground = Brushes.Green;
+            ProccessIsStart = false;
+            MyStopwatch.Restart();
+            WebRequest webRequest = WebRequest.Create(url);
+            WebResponse response = await webRequest.GetResponseAsync();
+
+            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            {
+                string sizeOfCharters = await reader.ReadToEndAsync();
+                UrlSize = $"Size of Your Size Is: {sizeOfCharters.Length.ToString()} Bytes.";
+            }
+            ProccessIsStart = true;
+            MyStopwatch.Stop();
+
         }
 
         private void OnPropertyChanged(string property)
@@ -113,8 +107,6 @@ namespace _28082019_WPF_ExamQ2
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
-
-       
-        public event PropertyChangedEventHandler PropertyChanged;
     }
+
 }
