@@ -1,0 +1,21 @@
+﻿<Window x:Class="_28082019_WPF_ExamQ2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_28082019_WPF_ExamQ2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Command="{Binding YourAnswerWrong}" Name="version1" Content="360" HorizontalAlignment="Left" Height="67" Margin="100,138,0,0" VerticalAlignment="Top" Width="154"/>
+        <Button Command="{Binding WrightAnswer}" Name="version2" Content="360" HorizontalAlignment="Left" Height="67" Margin="487,310,0,0" VerticalAlignment="Top" Width="154"/>
+        <Button Command="{Binding YourAnswerWrong}" Name="version3" Content="360" HorizontalAlignment="Left" Height="67" Margin="482,132,0,0" VerticalAlignment="Top" Width="154" />
+        <Button Command="{Binding YourAnswerWrong}" Name="version4" Content="360" HorizontalAlignment="Left" Height="67" Margin="97,303,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="1.983,0.468"/>
+
+        <TextBlock Name="Example" FontSize="30" HorizontalAlignment="Left" Height="56" Margin="270,38,0,0" TextWrapping="Wrap" Text="18 * 12 = ?" VerticalAlignment="Top" Width="260"/>
+        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="39" Margin="302,262,0,0" TextWrapping="Wrap" Text="Time Left" VerticalAlignment="Top" Width="156"/>
+        <TextBlock x:Name="TimeLeft"   FontSize="30" HorizontalAlignment="Left" Height="50" Margin="621,354,0,0" TextWrapping="Wrap" Foreground="{Binding TextColor}" Text="{Binding TimeValue}" VerticalAlignment="Top" Width="60" RenderTransformOrigin="-0.444,1.271"/>
+
+
+    </Grid>
+</Window>
